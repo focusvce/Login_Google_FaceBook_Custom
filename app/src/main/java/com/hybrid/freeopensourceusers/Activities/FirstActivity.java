@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -157,6 +158,7 @@ public class FirstActivity extends AppCompatActivity implements
                 finish();
                 return true;
             case R.id.action_settings_logged_out:
+                FacebookSdk.sdkInitialize(getApplicationContext());
                 LoginManager.getInstance().logOut();
                 signOut();
                 SharedPreferences sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);

@@ -111,7 +111,7 @@ public class RecyclerTrendingAdapter extends RecyclerView.Adapter<RecyclerTrendi
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     //Toast.makeText(myApplication.getBaseContext(),"Error loading image", Toast.LENGTH_LONG).show();
-                    holder.post_pic.setImageResource(R.drawable.quila2);
+                    holder.post_pic.setImageResource(R.drawable.no_image);
                 }
             });
 

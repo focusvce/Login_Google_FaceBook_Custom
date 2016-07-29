@@ -17,7 +17,7 @@ public class VolleySingleton {
     // Instance of Image loader
     private static ImageLoader imageLoader;
 
-    private RequestQueue mRequestQueue;
+    private static RequestQueue mRequestQueue;
 
     // Constructor
     private VolleySingleton() {

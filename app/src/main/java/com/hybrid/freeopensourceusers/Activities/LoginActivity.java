@@ -21,7 +21,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -41,6 +40,7 @@ import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.hybrid.freeopensourceusers.R;
 import com.hybrid.freeopensourceusers.Utility.Utility;
+import com.hybrid.freeopensourceusers.Volley.VolleySingleton;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -53,6 +53,8 @@ public class LoginActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener{
 
+    VolleySingleton volleySingleton;
+    RequestQueue requestQueue;
     String SOCIAL_REGISTER = Utility.getIPADDRESS()+"socialRegister";
     String LOGIN = Utility.getIPADDRESS()+"login";
     StringRequest stringRequest = null;
@@ -70,6 +72,8 @@ public class LoginActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         facebookSDKInitialize();
         setContentView(R.layout.activity_login);
+        volleySingleton = VolleySingleton.getInstance();
+        requestQueue = volleySingleton.getRequestQueue();
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("email");
         getLoginDetails(loginButton);
@@ -213,7 +217,6 @@ public class LoginActivity extends AppCompatActivity implements
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
-                        RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
                         requestQueue.add(stringRequest);
 
 
@@ -304,9 +307,6 @@ public class LoginActivity extends AppCompatActivity implements
                 }
 
             };
-
-
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(stringRequest);
 
         } else {
@@ -444,9 +444,6 @@ public class LoginActivity extends AppCompatActivity implements
                 }
 
             };
-
-
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(stringRequest);
 
 
