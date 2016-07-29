@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
@@ -80,7 +81,7 @@ public class RecyclerTrendingAdapter extends RecyclerView.Adapter<RecyclerTrendi
         holder.comment_count.setText(postFeed.getComment_count()+"");
         String avatar = postFeed.getUser_pic();
         String postpic = postFeed.getPostPicUrl();
-        if(!avatar.isEmpty()){
+        if(avatar!=null){
 
             imageLoader.get(avatar, new ImageLoader.ImageListener() {
                 @Override

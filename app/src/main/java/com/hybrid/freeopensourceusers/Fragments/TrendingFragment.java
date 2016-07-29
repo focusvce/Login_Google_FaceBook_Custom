@@ -87,7 +87,7 @@ public class TrendingFragment extends Fragment {
                 cr.moveToFirst();
                 do {
                     PostFeed newsFeed = new PostFeed(cr.getString(0),cr.getString(1),cr.getString(2),cr.getString(3),cr.getString(4),cr.getInt(5),
-                            cr.getInt(6),cr.getInt(7),cr.getInt(8),cr.getString(9));
+                            cr.getInt(6),cr.getInt(7),cr.getInt(8),cr.getString(9),cr.getString(10));
                     Log.e("MYSQL",newsFeed.toString());
                     newsFeeds.add(newsFeed);
                 } while (cr.moveToNext());
@@ -132,7 +132,7 @@ public class TrendingFragment extends Fragment {
 
             try {
                 JSONArray objectArray = response.getJSONArray("posts");
-                for (int i=0 ; i< objectArray.length(); i++){
+                for (int i=objectArray.length()-1 ; i>=0 ; i--){
 
                     int pid = objectArray.getJSONObject(i).getInt("Post_id");
                     int uid = objectArray.getJSONObject(i).getInt("User_id");
@@ -159,7 +159,7 @@ public class TrendingFragment extends Fragment {
                     postFeedObject.setDop(dateOfPost);
                     postFeedObject.setUser_name(user_name);
                     postFeedObject.setUser_pic(user_pic);
-                    dp.putInfo_HtmlTest(dp, title, link, description, dop, user_name, pid, up, comment_count, uid, postpic);
+                    dp.putInfo_HtmlTest(dp, title, link, description, dop, user_name, pid, up, comment_count, uid, postpic,user_pic);
 
 
                     newsFeedsList.add(postFeedObject);

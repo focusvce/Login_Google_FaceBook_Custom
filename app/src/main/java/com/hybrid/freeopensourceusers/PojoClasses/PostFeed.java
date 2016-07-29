@@ -24,7 +24,7 @@ public class PostFeed implements Parcelable{
     private String user_name;
     private String user_pic;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-    public PostFeed(String title,String link,String description,String dop,String user_name,int sr_key,int up,int comment_count,int uid, String user_pic){
+    public PostFeed(String title,String link,String description,String dop,String user_name,int sr_key,int up,int comment_count,int uid, String post_pic,String user_pic){
         this.title=title;
         this.link=link;
         this.description=description;
@@ -33,11 +33,12 @@ public class PostFeed implements Parcelable{
             p.printStackTrace();
         }
         this.user_name=user_name;
-        this.user_pic=user_pic;
+        this.postPicUrl=post_pic;
         this.pid=sr_key;
         this.up=up;
         this.comment_count=comment_count;
         this.uid=uid;
+        this.user_pic=user_pic;
     }
 
     public String getUser_name() {

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 /**
  * Created by adarsh on 4/7/16.
  */
@@ -15,17 +16,18 @@ public class DatabaseOperations extends SQLiteOpenHelper {
     User_Const user_const = new User_Const();
     Likes_Const likes_const = new Likes_Const();
     Comments_Const comments_const = new Comments_Const();
-    String create_html_test = "CREATE TABLE " + html_test_const.getTable_name() + "(" +
+    String create_html_test = "CREATE TABLE IF NOT EXISTS " + html_test_const.getTable_name() + "(" +
             html_test_const.getTitle() + " VARCHAR(50)," +
             html_test_const.getLink() + " VARCHAR(200)," +
             html_test_const.getDescription() + " VARCHAR(200)," +
-            html_test_const.getDate() + " DATE,"+
-            html_test_const.getUser_name()+ " VARCHAR(100),"+
+            html_test_const.getDate() + " DATE," +
+            html_test_const.getUser_name() + " VARCHAR(100)," +
             html_test_const.getSr_key() + " INTEGER PRIMARY KEY," +
             html_test_const.getUp_down() + " INTEGER," +
             html_test_const.getComment_count() + " INTEGER," +
             html_test_const.getUid() + " INTEGER," +
-            html_test_const.getPost_pic()+" VARCHAR(200));";
+            html_test_const.getPost_pic() + " VARCHAR(200),"+
+            html_test_const.getUser_pic()+" VARCHAR(200));";
 
     String create_user = "CREATE TABLE " + user_const.getTable_name() + "(" +
             user_const.getUser_id() + " INTEGER PRIMARY KEY," +
@@ -45,17 +47,6 @@ public class DatabaseOperations extends SQLiteOpenHelper {
             comments_const.getPid() + " INTEGER," +
             comments_const.getComment() + " VARCHAR(200));";
 
-    String create_post="CREATE TABLE "+ html_test_const.getTable_name()+ "("+
-            html_test_const.getTitle()+" VARCHAR(50),"+
-            html_test_const.getLink()+" VARCHAR(200),"+
-            html_test_const.getDescription()+" VARCHAR(200),"+
-            html_test_const.getDate()+" VARCHAR(20),"+
-            html_test_const.getUser_name()+" VARCHAR(50),"+
-            html_test_const.getUser_pic()+" VARCHAR(200),"+
-            html_test_const.getSr_key()+" INTEGER,"+
-            html_test_const.getUp_down()+" INTEGER,"+
-            html_test_const.getComment_count()+" INTEGER,"+
-            html_test_const.getUid()+" INTEGER);";
     // Database Version
     private static final int DATABASE_VERSION = 1;
 
@@ -78,10 +69,12 @@ public class DatabaseOperations extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
     }
-    public void delete_post(DatabaseOperations databaseOperations){
+
+    public void delete_post(DatabaseOperations databaseOperations) {
         SQLiteDatabase sqLiteDatabase = databaseOperations.getWritableDatabase();
-        sqLiteDatabase.execSQL("delete from "+ html_test_const.getTable_name());
+        sqLiteDatabase.execSQL("delete from " + html_test_const.getTable_name());
     }
+
     public void delete_all(DatabaseOperations databaseOperations) {
         SQLiteDatabase sqLiteDatabase = databaseOperations.getWritableDatabase();
         sqLiteDatabase.execSQL("delete from " + html_test_const.getTable_name());
@@ -89,7 +82,6 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("delete from " + likes_const.getTable_name());
         sqLiteDatabase.execSQL("delete from " + comments_const.getTable_name());
     }
-
 
 
     public void putInfo_Comment(DatabaseOperations dop, int uid, int pid, String comment) {
@@ -123,30 +115,26 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         sqLiteDatabase.insert(user_const.getTable_name(), null, cv);
     }
 
-    public void putInfo_HtmlTest(DatabaseOperations dp,String title,String link,String description,String dop
-            ,String user_name,int sr_key,int up,int comment_count,int uid,String post_pic){
+    public void putInfo_HtmlTest(DatabaseOperations dp, String title, String link, String description, String dop
+            , String user_name, int sr_key, int up, int comment_count, int uid, String post_pic,String user_pic) {
         SQLiteDatabase sqLiteDatabase = dp.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(html_test_const.getTitle(),title);
-        cv.put(html_test_const.getLink(),link);
-        cv.put(html_test_const.getDescription(),description);
-        cv.put(html_test_const.getDate(),dop);
-        cv.put(html_test_const.getUser_name(),user_name);
-        cv.put(html_test_const.getSr_key(),sr_key);
-        cv.put(html_test_const.getUp_down(),up);
-        cv.put(html_test_const.getComment_count(),comment_count);
-        cv.put(html_test_const.getUid(),uid);
-        cv.put(html_test_const.getPost_pic(),post_pic);
-        sqLiteDatabase.insert(html_test_const.getTable_name(),null,cv);
+        cv.put(html_test_const.getTitle(), title);
+        cv.put(html_test_const.getLink(), link);
+        cv.put(html_test_const.getDescription(), description);
+        cv.put(html_test_const.getDate(), dop);
+        cv.put(html_test_const.getUser_name(), user_name);
+        cv.put(html_test_const.getSr_key(), sr_key);
+        cv.put(html_test_const.getUp_down(), up);
+        cv.put(html_test_const.getComment_count(), comment_count);
+        cv.put(html_test_const.getUid(), uid);
+        cv.put(html_test_const.getPost_pic(), post_pic);
+        cv.put(html_test_const.getUser_pic(),user_pic);
+        sqLiteDatabase.insert(html_test_const.getTable_name(), null, cv);
     }
-    public Cursor getInfo_Post(DatabaseOperations dop){
-        SQLiteDatabase sqLiteDatabase = dop.getReadableDatabase();
-        String columns[]={html_test_const.getTitle(), html_test_const.getLink(), html_test_const.getDescription(),
-                html_test_const.getDate(), html_test_const.getUser_name(), html_test_const.getUser_pic(), html_test_const.getSr_key(),
-                html_test_const.getUp_down(), html_test_const.getComment_count(), html_test_const.getUid(), html_test_const.getUser_pic()};
-        Cursor cr = sqLiteDatabase.query(html_test_const.getTable_name(),columns,null,null,null,null,null);
-        return cr;
-    }
+
+
+
     public Cursor getInfo_Comment(DatabaseOperations dop) {
         SQLiteDatabase sqLiteDatabase = dop.getReadableDatabase();
         String columns[] = {comments_const.getUid(), comments_const.getPid(), comments_const.getComment()};
@@ -174,9 +162,9 @@ public class DatabaseOperations extends SQLiteOpenHelper {
     public Cursor getInfo_HmtlTest(DatabaseOperations dop) {
         SQLiteDatabase sqLiteDatabase = dop.getReadableDatabase();
         String columns[] = {html_test_const.getTitle(), html_test_const.getLink(), html_test_const.getDescription(),
-                html_test_const.getDate(), html_test_const.getUser_name(), html_test_const.getSr_key(),html_test_const.getUp_down(),
-                html_test_const.getComment_count(),html_test_const.getUid(),html_test_const.getPost_pic()};
-        Cursor cr = sqLiteDatabase.query(html_test_const.getTable_name(), columns, null, null, null, null, null);
+                html_test_const.getDate(), html_test_const.getUser_name(), html_test_const.getSr_key(), html_test_const.getUp_down(),
+                html_test_const.getComment_count(), html_test_const.getUid(), html_test_const.getPost_pic(),html_test_const.getUser_pic()};
+        Cursor cr = sqLiteDatabase.query(html_test_const.getTable_name(), columns, null, null, null, null, html_test_const.getDate()+" desc");
         return cr;
     }
 
@@ -207,8 +195,8 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         String table_name = "likes";
         String login_id = "login_id";
         String post_id = "post_id";
-        String like_or_not="like_or_not";
-        String like_status="like_status";
+        String like_or_not = "like_or_not";
+        String like_status = "like_status";
 
         public String getTable_name() {
             return table_name;
@@ -275,7 +263,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
     }
 
     public class Html_Test_Const {
-        String table_name = "html_test";
+        String table_name = "html_tests";
         String sr_key = "sr_key";
         String link = "link";
         String title = "title";
@@ -285,8 +273,12 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         String uid = "uid";
         String date = "date";
         String post_pic = "post_pic";
-        String user_name="user_name";
-        String user_pic="user_pic";
+        String user_name = "user_name";
+        String user_pic = "user_pic";
+
+        Html_Test_Const() {
+
+        }
 
         public String getUser_pic() {
             return user_pic;
@@ -298,14 +290,6 @@ public class DatabaseOperations extends SQLiteOpenHelper {
 
         public String getPost_pic() {
             return post_pic;
-        }
-
-
-
-
-
-        Html_Test_Const() {
-
         }
 
         public String getTable_name() {
