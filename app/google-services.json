@@ -1,0 +1,87 @@
+{
+  "project_info": {
+    "project_number": "153995500888",
+    "project_id": "focus-8f3bb"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153995500888:android:6280a616593957c8",
+        "android_client_info": {
+          "package_name": "com.hybrid.customlogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153995500888-tq4p38kpe4hd12on0co0into65ibdr8m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hybrid.customlogin",
+            "certificate_hash": "D07886218B9CE5C61193420116A117CEDA77DB69"
+          }
+        },
+        {
+          "client_id": "153995500888-9ctt35qjrl5o6i5vagej1ndaqmriss45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCADxSkiJr9ioL-HdQPpyz1F9S1q6ZT6MU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153995500888:android:220c788012ddebd2",
+        "android_client_info": {
+          "package_name": "com.hybrid.freeopensourceusers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "153995500888-7ie54du2dpg0vf0j0p20pnvsb4ulos8e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hybrid.freeopensourceusers",
+            "certificate_hash": "D07886218B9CE5C61193420116A117CEDA77DB69"
+          }
+        },
+        {
+          "client_id": "153995500888-9ctt35qjrl5o6i5vagej1ndaqmriss45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCADxSkiJr9ioL-HdQPpyz1F9S1q6ZT6MU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
